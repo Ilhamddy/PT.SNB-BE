@@ -1,0 +1,43 @@
+import express, { Request, Response,   static as static_ } from "express";
+import cors from "cors";
+import router from "./routes/RoleRoute";
+import { NewsRouter } from './routes/NewsRoute';
+import dotenv from "dotenv";
+import {UserRouter} from "./routes/UserRoute";
+import { join } from "path";
+
+
+
+dotenv.config();
+const app = express();
+
+const PORT = process.env.APP_PORT;
+app.use(express.json());
+app.use(cors())
+app.use('/', static_(join(__dirname, '../public')));
+
+
+app.get("/api", (req: Request, res: Response) => {
+  return res.status(200).send({
+    response: "Require Berhasil Didapat",
+  });
+  // res.send("hello");
+});
+
+
+const newsRouter = new NewsRouter();
+const userRouter = new UserRouter();
+
+app.use(router);
+
+app.use('/api/news', newsRouter.getRouter());
+app.use('/api/user', userRouter.getRouter());
+
+
+app.get("/", (req: Request, res: Response) => {
+  return res.send("Berhasil get Data");
+});
+
+app.listen(PORT, () => {
+  console.log("Express API Succesfully " + PORT);
+});
