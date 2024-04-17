@@ -3,7 +3,10 @@ import cors from "cors";
 import router from "./routes/RoleRoute";
 import { NewsRouter } from './routes/NewsRoute';
 import dotenv from "dotenv";
-import {UserRouter} from "./routes/UserRoute";
+import { UserRouter } from "./routes/UserRoute";
+import { ServicesRouter } from "./routes/ServicesRoute";
+import { FaqRouter } from "./routes/FaqsRoute";
+
 import { join } from "path";
 
 
@@ -27,11 +30,17 @@ app.get("/api", (req: Request, res: Response) => {
 
 const newsRouter = new NewsRouter();
 const userRouter = new UserRouter();
+const faqRouter = new FaqRouter();
+const servicesRouter = new ServicesRouter();
+
 
 app.use(router);
 
 app.use('/api/news', newsRouter.getRouter());
 app.use('/api/user', userRouter.getRouter());
+app.use('/api/faq', faqRouter.getRouter());
+app.use('/api/services', servicesRouter.getRouter());
+
 
 
 app.get("/", (req: Request, res: Response) => {

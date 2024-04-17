@@ -1,7 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import connection from "../../config/dbConnect";
 
-interface ServicesAttributes {
+interface FaqAtttributes {
   id?: number;
   title?: string | null;
   description?: string | null;
@@ -11,10 +11,10 @@ interface ServicesAttributes {
 }
 
 // Define input and output interfaces without createdAt and updatedAt
-export interface userInput extends Optional<ServicesAttributes, "id"> {}
-export interface userOutput extends Required<ServicesAttributes> {}
+export interface faqInput extends Optional<FaqAtttributes, "id"> {}
+export interface faqOutput extends Required<FaqAtttributes> {}
 
-class Services extends Model<ServicesAttributes, userInput> implements ServicesAttributes {
+class Faq extends Model<FaqAtttributes, faqInput> implements FaqAtttributes {
   public id!: number;
   public title!: string;
   public description!: string;
@@ -23,14 +23,14 @@ class Services extends Model<ServicesAttributes, userInput> implements ServicesA
   public readonly updatedAt!: Date;
 
 
-  public static associate(models: any) {
-    Services.hasMany(models.User, { foreignKey: 'userId' });
+  // public static associate(models: any) {
+  //   Faq.hasMany(models.User, { foreignKey: 'userId' });
     
-  }
+  // }
   // createdAt and updatedAt are automatically managed, so they don't need to be defined here
 }
 
-Services.init(
+Faq.init(
   {
     id: {
       allowNull: false,
@@ -72,4 +72,4 @@ Services.init(
 
 
 
-export default Services;
+export default Faq;

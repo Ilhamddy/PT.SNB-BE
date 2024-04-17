@@ -1,5 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import connection from "../../config/dbConnect";
+import User from "./user";
+
 
 interface RoleAttributes {
   id?: number;
@@ -7,7 +9,7 @@ interface RoleAttributes {
   description?: string | null;
   image?: string | null;
   userId?: string | null;
-
+  categoryId?: string | null ;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -22,16 +24,17 @@ class News extends Model<RoleAttributes, roleInput> implements RoleAttributes {
   public description!: string;
   public image!: string;
   public userId!: string;
+  public categoryId!: string;
+
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
   // createdAt and updatedAt are automatically managed, so they don't need to be defined here
-  public static associate(models: any) {
-    News.belongsTo(models.User, { foreignKey: 'userId' });
-    
-    
-  }
+  // public static associate(models : any) {
+  //   News.belongsTo(models.User , { foreignKey: 'userId' });
+  // }
 }
+
 
 News.init(
   {
@@ -53,10 +56,18 @@ News.init(
       allowNull: true,
       type: DataTypes.STRING,
     },
-    // userId: {
-    //   allowNull: true,
-    //   type: DataTypes.STRING,
-    // },
+    categoryId: {
+      allowNull: true,
+      type: DataTypes.STRING,
+    },
+    userId: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      references: {
+        model: 'User',
+        key: 'id'
+      }
+    },
     // Explicitly define createdAt and updatedAt to satisfy TypeScript
     createdAt: {
       type: DataTypes.DATE,
@@ -68,12 +79,21 @@ News.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+
+    
   },
+
   {
     timestamps: true, // This ensures Sequelize manages createdAt and updatedAt
     sequelize: connection,
     underscored: false,
-  }
+  },
+
+ 
+
 );
+
+// News.belongsTo(User, { foreignKey: 'userId' });
+
 
 export default News;

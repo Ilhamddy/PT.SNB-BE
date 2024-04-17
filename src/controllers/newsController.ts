@@ -22,13 +22,10 @@ export class NewsController {
     async createNewsController (req: Request, res: Response, next: NextFunction)  {
      try {
          const data = req.body;
-     
          const imageUrl =  `${req.file?.filename}`;
-
          console.log('req dataa', data);
          console.log('req data11', imageUrl);
-         
-    
+
          // Creating the news item with the image URL
          const createNews = await News.create({
              title: data.title,

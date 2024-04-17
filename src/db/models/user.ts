@@ -1,5 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import connection from "../../config/dbConnect";
+import News from "./news";
 
 interface UserAttributes {
   id?: number;
@@ -31,12 +32,13 @@ class User extends Model<UserAttributes, userInput> implements UserAttributes {
 
 
   public static associate(models: any) {
-    User.belongsTo(models.Role, { foreignKey: 'roleId' });
+    // User.belongsTo(models.Role, { foreignKey: 'roleId' });
     User.hasMany(models.News, { foreignKey: 'userId' });
     
   }
   // createdAt and updatedAt are automatically managed, so they don't need to be defined here
 }
+
 
 User.init(
   {
@@ -53,6 +55,7 @@ User.init(
     email: {
       allowNull: true,
       type: DataTypes.STRING,
+      unique: true,
     },
     contact: {
       allowNull: true,
@@ -91,6 +94,7 @@ User.init(
   
 );
 
+// User.hasMany(News, { foreignKey: 'userId' });
 
 // User.associate = (models) => {
 //   User.belongsTo(models.role, { foreignKey: 'roleId' });

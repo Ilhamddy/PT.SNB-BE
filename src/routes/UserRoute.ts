@@ -34,8 +34,8 @@ export class UserRouter{
     private initializeRoutes(): void{
         this.router.get('/', this.usersController.getUserController);
         this.router.post('/create-user', this.usersController.createUserController);
-        this.router.delete('/delete-user', this.usersController.deleteUserController);
-        this.router.patch('/update-user', this.usersController.updateUserControler);
+        this.router.delete('/delete-user/:id', this.usersController.deleteUserController);
+        this.router.patch('/update-user/:id', this.usersController.updateUserControler);
         this.router.post('/login', this.usersController.loginUserController);
     this.router.get('/keep', verifyToken, this.usersController.keepLogin);
 
