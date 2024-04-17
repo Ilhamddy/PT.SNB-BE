@@ -8,8 +8,7 @@
     "start": "npm run build && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.ts",
-    "sequelize": "npx sequelize-cli",
-    "deploy": "node --experimental-specifier-resolution=node src/index.ts"
+    "sequelize": "npx sequelize-cli"
   },
   "keywords": [],
   "author": "",

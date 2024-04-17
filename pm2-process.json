@@ -1,10 +1,10 @@
 {
-    "script": "npm run deploy",
-    "watch": true,
-    "ignore_watch": ["logs", "node_modules"],
-    "watch_options": {
-        "followSymlinks": false
-    },
-    "name": "becompanyprofile",
-    "autorestart": true
+  "script": "npm run dev",
+  "watch": true,
+  "ignore_watch": ["logs", "node_modules"],
+  "watch_options": {
+    "followSymlinks": false
+  },
+  "name": "becompanyprofile",
+  "autorestart": true
 }
